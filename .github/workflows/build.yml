@@ -1,9 +1,9 @@
-name: build
-
 on:
   push:
     branches:
       - master
+
+name: build
 
 jobs:
   build:
@@ -27,7 +27,6 @@ jobs:
         uses: montudor/action-zip@v0.1.0
         with:
           args: zip -qq -r ./artifacts/add.zip codedeploy appspec.yml target/release/test_pipeline
-
 
       - name: S3 Sync
           uses: jakejarvis/s3-sync-action@v0.5.1
