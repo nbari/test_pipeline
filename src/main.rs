@@ -70,10 +70,20 @@ async fn hello() -> Result<impl warp::Reply, warp::Rejection> {
 // ANY /health
 // return X-APP header and the commit in the body
 async fn health() -> Result<impl warp::Reply, warp::Rejection> {
+    let short_hash = if GIT_COMMIT_HASH.len() > 7 {
+        &GIT_COMMIT_HASH[0..7]
+    } else {
+        ""
+    };
     Ok(Response::builder()
         .header(
             "X-App",
-            format!("{}:{}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION")),
+            format!(
+                "{}:{}:{}",
+                env!("CARGO_PKG_NAME"),
+                env!("CARGO_PKG_VERSION"),
+                short_hash
+            ),
         )
         .body(GIT_COMMIT_HASH))
 }
