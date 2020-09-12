@@ -26,6 +26,9 @@ jobs:
       - name: Make artifact directory
         run: mkdir -p ./artifacts
 
+      - name: ls
+        run: ls -al
+
       - name: Create Zip File
         uses: montudor/action-zip@v0.1.0
         with:
