@@ -1,4 +1,5 @@
 use chrono::prelude::*;
+use clap::{App, Arg};
 use std::net::{IpAddr, Ipv4Addr};
 use std::str::FromStr;
 use warp::{http::Response, Filter};
@@ -7,10 +8,34 @@ pub mod built_info {
     include!(concat!(env!("OUT_DIR"), "/built.rs"));
 }
 
+pub const GIT_COMMIT_HASH: &str = if let Some(hash) = built_info::GIT_COMMIT_HASH {
+    hash
+} else {
+    ":-("
+};
+
+fn is_num(s: String) -> Result<(), String> {
+    if let Err(..) = s.parse::<u16>() {
+        return Err(String::from("Not a valid port number!"));
+    }
+    Ok(())
+}
+
 #[tokio::main]
 async fn main() {
-    // port where app will listen
-    let port = 80;
+    let matches = App::new("demo")
+        .version(format!("{} {}", env!("CARGO_PKG_VERSION"), GIT_COMMIT_HASH).as_ref())
+        .arg(
+            Arg::with_name("port")
+                .default_value("80")
+                .help("listening port")
+                .long("port")
+                .validator(is_num)
+                .required(true),
+        )
+        .get_matches();
+
+    let port = matches.value_of("port").unwrap().parse::<u16>().unwrap();
 
     let now = Utc::now();
     println!(
@@ -45,16 +70,10 @@ async fn hello() -> Result<impl warp::Reply, warp::Rejection> {
 // ANY /health
 // return X-APP header and the commit in the body
 async fn health() -> Result<impl warp::Reply, warp::Rejection> {
-    let hash = if let Some(hash) = built_info::GIT_COMMIT_HASH {
-        hash
-    } else {
-        "not defined"
-    };
-
     Ok(Response::builder()
         .header(
             "X-App",
             format!("{}:{}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION")),
         )
-        .body(format!("commit: {}", hash)))
+        .body(GIT_COMMIT_HASH))
 }
