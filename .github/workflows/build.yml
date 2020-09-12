@@ -26,10 +26,10 @@ jobs:
       - name: Make artifact directory
         run: mkdir -p ./artifacts/${{ github.repository }}
 
-      - name: ls
+      - name: ls repo
         run: ls -alR ${{ github.repository }}
 
-      - name: ls
+      - name: ls workspace
         run: ls -alR ${{ github.workspace }}
 
       - name: Create Zip File
