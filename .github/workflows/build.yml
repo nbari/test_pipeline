@@ -27,16 +27,12 @@ jobs:
         run: mkdir -p ./artifacts/${{ github.repository }}
 
       - name: ls
-        run: ls -alR
-
-      - name: ls GITHUB_WORKSPACE
-        run: ls -al ${{GITHUB_WORKSPACE}}
-
+        run: ls -alR ${{ github.repository }}
 
       - name: Create Zip File
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -qq -r ./artifacts/${{ github.repository }}/app.zip . -i codedeploy appspec.yml target/release/test_pipeline
+          args: zip -qq -r ./artifacts/${{ github.repository }}/app.zip ${{ github.repository}}/codedeploy ${{ github.repository }}/appspec.yml ${{ github.repository }}/target/release/test_pipeline
 
       - name: S3 Sync
         uses: jakejarvis/s3-sync-action@v0.5.1
