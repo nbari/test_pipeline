@@ -29,6 +29,9 @@ jobs:
       - name: ls
         run: ls -alR
 
+      - name: ls GITHUB_WORKSPACE
+        run: ls -al ${{GITHUB_WORKSPACE}}
+
 
       - name: Create Zip File
         uses: montudor/action-zip@v0.1.0
