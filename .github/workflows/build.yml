@@ -26,16 +26,13 @@ jobs:
       - name: Make artifact directory
         run: mkdir -p ./artifacts/${{ github.repository }}
 
-      - name: ls repo
-        run: ls -alR ${{ github.repository }}
-
       - name: ls workspace
         run: ls -alR ${{ github.workspace }}
 
       - name: Create Zip File
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -qq -r ./artifacts/${{ github.repository }}/app.zip ${{ github.repository}}/codedeploy ${{ github.repository }}/appspec.yml ${{ github.repository }}/target/release/test_pipeline
+          args: zip -qq -r ./artifacts/${{ github.repository }}/app.zip ${{ github.workspace}}/codedeploy ${{ github.workspace }}/appspec.yml ${{ github.workspace }}/target/release/test_pipeline
 
       - name: S3 Sync
         uses: jakejarvis/s3-sync-action@v0.5.1
