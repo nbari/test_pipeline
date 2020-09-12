@@ -6,7 +6,7 @@ Type=simple
 Restart=always
 RestartSec=3s
 Environment=FOO=BAR
-ExecStart=/opt/app
+ExecStart=/opt/app/test_pipeline
 
 [Install]
 WantedBy=multi-user.target
