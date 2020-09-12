@@ -1,0 +1,19 @@
+---
+version: 0.0
+os: linux
+files:
+  - source: target/release/test_pipeline
+    destination: /opt/app
+  - source: codedeploy/app.service
+    destination: /usr/lib/systemd/system/
+hooks:
+  ApplicationStop:
+    - location: codedeploy/application_stop.sh
+  BeforeInstall:
+    - location: codedeploy/before_install.sh
+  AfterInstall:
+    - location: codedeploy/after_install.sh
+  ApplicationStart:
+    - location: codedeploy/application_start.sh
+  ValidateService:
+    - location: codedeploy/check_service.sh
