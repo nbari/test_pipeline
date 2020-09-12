@@ -1,15 +1,10 @@
 use chrono::prelude::*;
-use lazy_static::lazy_static;
-use std::env;
 use std::net::{IpAddr, Ipv4Addr};
 use std::str::FromStr;
 use warp::{http::Response, Filter};
 
-lazy_static! {
-    static ref COMMIT: String = match env::var("GITHUB_SHA") {
-        Ok(val) => val,
-        Err(_) => "not defiend".to_string(),
-    };
+pub mod built_info {
+    include!(concat!(env!("OUT_DIR"), "/built.rs"));
 }
 
 #[tokio::main]
@@ -50,10 +45,16 @@ async fn hello() -> Result<impl warp::Reply, warp::Rejection> {
 // ANY /health
 // return X-APP header and the commit in the body
 async fn health() -> Result<impl warp::Reply, warp::Rejection> {
+    let hash = if let Some(hash) = built_info::GIT_COMMIT_HASH {
+        hash
+    } else {
+        "not defined"
+    };
+
     Ok(Response::builder()
         .header(
             "X-App",
             format!("{}:{}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION")),
         )
-        .body(format!("commit: {}", &*COMMIT)))
+        .body(format!("commit: {}", hash)))
 }
