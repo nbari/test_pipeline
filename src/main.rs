@@ -6,7 +6,7 @@ use std::str::FromStr;
 use warp::{http::Response, Filter};
 
 lazy_static! {
-    static ref COMMIT: String = match env::var("COMMIT") {
+    static ref COMMIT: String = match env::var("GITHUB_SHA") {
         Ok(val) => val,
         Err(_) => "not defiend".to_string(),
     };
