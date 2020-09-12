@@ -1,9 +1,12 @@
+name: build
+
 on:
   push:
     branches:
       - master
 
-name: build
+env:
+  CARGO_TERM_COLOR: always
 
 jobs:
   build:
