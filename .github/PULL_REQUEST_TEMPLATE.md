@@ -1,0 +1,5 @@
+- [ ] Have you test the code?
+- [ ] Have you check that the existing tests are passing?
+- [ ] You have added unit tests
+- [ ] Your code builds clean without any errors or warnings
+- [ ] The destination branch is **develop**?
