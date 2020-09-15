@@ -9,11 +9,16 @@ files:
 hooks:
   ApplicationStop:
     - location: codedeploy/application_stop.sh
+      timeout: 30
   BeforeInstall:
     - location: codedeploy/before_install.sh
+      timeout: 30
   AfterInstall:
     - location: codedeploy/after_install.sh
+      timeout: 30
   ApplicationStart:
     - location: codedeploy/application_start.sh
+      timeout: 30
   ValidateService:
     - location: codedeploy/check_service.sh
+      timeout: 30
