@@ -5,7 +5,7 @@ Description=app
 Type=simple
 Restart=always
 RestartSec=3s
-Environment=FOO=BAR
+Environment=RUST_LOG=test
 ExecStart=/opt/app/test_pipeline
 
 [Install]
