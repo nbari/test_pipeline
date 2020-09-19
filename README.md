@@ -12,7 +12,6 @@ Develop branch
 * Require signed commits
 * Require linear history
 
-
 Creating the zip:
 
      zip -r add.zip codedeploy appspec.yml target/release/test_pipeline
