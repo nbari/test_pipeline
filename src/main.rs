@@ -1,8 +1,9 @@
 use chrono::prelude::*;
 use clap::{App, Arg};
+use std::convert::Infallible;
 use std::net::{IpAddr, Ipv4Addr};
 use std::str::FromStr;
-use warp::{http::Response, Filter};
+use warp::{http::HeaderMap, http::Response, Filter};
 
 pub mod built_info {
     include!(concat!(env!("OUT_DIR"), "/built.rs"));
@@ -23,7 +24,6 @@ fn is_num(s: String) -> Result<(), String> {
 
 #[tokio::main]
 async fn main() {
-    env_logger::init();
     let matches = App::new("demo")
         .version(format!("{} {}", env!("CARGO_PKG_VERSION"), GIT_COMMIT_HASH).as_ref())
         .arg(
@@ -45,9 +45,8 @@ async fn main() {
         port
     );
 
-    let log = warp::log("test");
     // define the routes to use
-    let hello = warp::get().and_then(hello).with(log);
+    let hello = warp::get().and(log_headers()).and_then(hello);
     let health = warp::any().and(warp::path("health")).and_then(health);
 
     // GET /*
@@ -62,6 +61,20 @@ async fn main() {
 
     // start service
     warp::serve(routes).run((addr, port)).await;
+}
+
+fn log_headers() -> impl Filter<Extract = (), Error = Infallible> + Copy {
+    warp::header::headers_cloned()
+        .map(|headers: HeaderMap| {
+            for (k, v) in headers.iter() {
+                println!(
+                    "{}: {}",
+                    k,
+                    v.to_str().expect("Failed to print header value")
+                )
+            }
+        })
+        .untuple_one()
 }
 
 // GET  /*
