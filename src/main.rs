@@ -67,8 +67,8 @@ fn log_headers() -> impl Filter<Extract = (), Error = Infallible> + Copy {
     warp::header::headers_cloned()
         .map(|headers: HeaderMap| {
             for (k, v) in headers.iter() {
-                println!(
-                    "{}: {}",
+                print!(
+                    "{}: {} ",
                     k,
                     v.to_str().expect("Failed to print header value")
                 )
