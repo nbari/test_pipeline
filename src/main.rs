@@ -79,7 +79,19 @@ fn log_headers() -> impl Filter<Extract = (), Error = Infallible> + Copy {
 
 // GET  /*
 async fn hello() -> Result<impl warp::Reply, warp::Rejection> {
-    Ok(Response::builder().body("hello world!"))
+    Ok(Response::builder().body(
+        "<html>
+    <head>
+    <style>
+    body {
+      background-color: green;
+      }
+      </style>
+      </head>
+      <body>
+      </body>
+      </html>",
+    ))
 }
 
 // ANY /health
