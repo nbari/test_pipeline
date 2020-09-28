@@ -4,13 +4,13 @@ help: check-key clean
 	@echo "Use encrypt or decrypt"
 
 encrypt: check-key
-	@openssl enc -pbkdf2 -in env.yml -out env.yml.enc -e -aes256 -k ${KEY}
+	@openssl enc -pbkdf2 -in env -out env.enc -e -aes256 -k ${KEY}
 
 decrypt: check-key
-	@openssl enc -pbkdf2 -in env.yml.enc -out env.yml -d -aes256 -k ${KEY}
+	@openssl enc -pbkdf2 -in env.enc -out env -d -aes256 -k ${KEY}
 
 clean:
-	@rm -fv env.yml
+	@rm -fv env
 
 check-key:
 ifndef KEY
