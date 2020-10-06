@@ -19,3 +19,5 @@ Creating the zip:
 Create random key:
 
     openssl rand -base64 32
+
+.
