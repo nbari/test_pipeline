@@ -5,6 +5,15 @@ use std::net::{IpAddr, Ipv4Addr};
 use std::str::FromStr;
 use warp::{http::HeaderMap, http::Response, Filter};
 
+const HTML: &str = r#"
+<html><head><style>
+body {
+    background-color: #87CEFA;
+}
+</style></head><body>
+Hello world!
+</body></html>"#;
+
 pub mod built_info {
     include!(concat!(env!("OUT_DIR"), "/built.rs"));
 }
@@ -79,7 +88,9 @@ fn log_headers() -> impl Filter<Extract = (), Error = Infallible> + Copy {
 
 // GET  /*
 async fn hello() -> Result<impl warp::Reply, warp::Rejection> {
-    Ok(Response::builder().body("hello world!"))
+    Ok(Response::builder().body(HTML))
+    //let blue = HTML.replace("#87CEFA", "green");
+    //Ok(Response::builder().body(blue))
 }
 
 // ANY /health
