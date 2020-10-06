@@ -88,9 +88,9 @@ fn log_headers() -> impl Filter<Extract = (), Error = Infallible> + Copy {
 
 // GET  /*
 async fn hello() -> Result<impl warp::Reply, warp::Rejection> {
-    Ok(Response::builder().body(HTML))
-    //let blue = HTML.replace("#87CEFA", "green");
-    //Ok(Response::builder().body(blue))
+    // Ok(Response::builder().body(HTML))
+    let blue = HTML.replace("#87CEFA", "green");
+    Ok(Response::builder().body(blue))
 }
 
 // ANY /health
