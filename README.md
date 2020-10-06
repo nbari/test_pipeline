@@ -17,7 +17,7 @@ Keep develop in sync with master:
 
     git pull origin master --rebase
 
-or
+to reset branch to be like master:
 
     git reset --hard origin/master
 
