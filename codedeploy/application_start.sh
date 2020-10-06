@@ -1,3 +1,3 @@
 #!/bin/sh
 
-systemctl start app
+systemctl start app || true
