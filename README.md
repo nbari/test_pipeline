@@ -4,16 +4,23 @@ Master branch
 
 * Require status checks to pass before merging
 * Require signed commits
+* Require linear history
 
 Develop branch
 
 * Require status checks to pass before merging
 * Require signed commits
 * Require linear history
+* Allow force pushes
 
+Keep develop in sync with master:
 
-Create PR against branch `develop`, then it can be `merged` into master, doing
-this helps to keep branch "even"
+    git pull origin master --rebase
+
+or
+
+    git reset --hard origin/master
+
 
 Creating the zip:
 
