@@ -4,6 +4,7 @@ Master branch
 
 * Require status checks to pass before merging
 * Require signed commits
+* Require linear history
 
 Develop branch
 
