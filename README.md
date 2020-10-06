@@ -4,7 +4,6 @@ Master branch
 
 * Require status checks to pass before merging
 * Require signed commits
-* Require linear history
 
 Develop branch
 
@@ -19,5 +18,3 @@ Creating the zip:
 Create random key:
 
     openssl rand -base64 32
-
-.
