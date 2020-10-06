@@ -11,11 +11,20 @@ Develop branch
 * Require status checks to pass before merging
 * Require signed commits
 * Require linear history
+* Allow force pushes
+
+Keep develop in sync with master:
+
+    git pull origin master --rebase
+
+or
+
+    git reset --hard origin/master
+
 
 Creating the zip:
 
      zip -r add.zip codedeploy appspec.yml target/release/test_pipeline
-
 
 Create random key:
 
