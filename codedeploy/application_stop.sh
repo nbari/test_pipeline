@@ -1,5 +1,3 @@
 #!/bin/sh
 
-systemctl stop app
-
-exit 0
+systemctl stop app || true
