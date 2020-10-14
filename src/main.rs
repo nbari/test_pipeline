@@ -1,5 +1,6 @@
 use chrono::prelude::*;
 use clap::{App, Arg};
+use std::collections::HashMap;
 use std::convert::Infallible;
 use std::net::{IpAddr, Ipv4Addr};
 use std::str::FromStr;
@@ -75,13 +76,14 @@ async fn main() {
 fn log_headers() -> impl Filter<Extract = (), Error = Infallible> + Copy {
     warp::header::headers_cloned()
         .map(|headers: HeaderMap| {
+            let mut header_hashmap: HashMap<String, Vec<String>> = HashMap::new();
             for (k, v) in headers.iter() {
-                print!(
-                    "{}: {} ",
-                    k,
-                    v.to_str().expect("Failed to print header value")
-                )
+                let k = k.as_str().to_owned();
+                let v = String::from_utf8_lossy(v.as_bytes()).into_owned();
+                header_hashmap.entry(k).or_insert_with(Vec::new).push(v)
             }
+            let j = serde_json::to_string(&header_hashmap).unwrap();
+            println!("{}", j);
         })
         .untuple_one()
 }

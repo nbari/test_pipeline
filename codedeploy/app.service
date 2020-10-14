@@ -4,9 +4,10 @@ Description=app
 [Service]
 Type=simple
 Restart=always
-RestartSec=3s
-Environment=RUST_LOG=test
 ExecStart=/opt/app/test_pipeline
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=app_hello
 
 [Install]
 WantedBy=multi-user.target

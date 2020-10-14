@@ -1152,6 +1152,7 @@ dependencies = [
  "built",
  "chrono",
  "clap",
+ "serde_json",
  "tokio",
  "warp",
 ]
