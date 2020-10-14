@@ -76,11 +76,11 @@ async fn main() {
 fn log_headers() -> impl Filter<Extract = (), Error = Infallible> + Copy {
     warp::header::headers_cloned()
         .map(|headers: HeaderMap| {
-            let mut header_hashmap: HashMap<String, Vec<String>> = HashMap::new();
+            let mut header_hashmap: HashMap<String, String> = HashMap::new();
             for (k, v) in headers.iter() {
                 let k = k.as_str().to_owned();
                 let v = String::from_utf8_lossy(v.as_bytes()).into_owned();
-                header_hashmap.entry(k).or_insert_with(Vec::new).push(v)
+                header_hashmap.entry(k).or_insert(v);
             }
             let j = serde_json::to_string(&header_hashmap).unwrap();
             println!("{}", j);
