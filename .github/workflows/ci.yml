@@ -1,5 +1,4 @@
 name: ci
-runs-on: self-hosted
 
 on: [pull_request]
 
@@ -9,7 +8,8 @@ env:
 jobs:
   check:
     name: Check
-    runs-on: ubuntu-latest
+      # runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -23,7 +23,8 @@ jobs:
 
   test:
     name: Test Suite
-    runs-on: ubuntu-latest
+      #runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -37,7 +38,8 @@ jobs:
 
   fmt:
     name: Rustfmt
-    runs-on: ubuntu-latest
+      #runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -53,7 +55,8 @@ jobs:
 
   clippy:
     name: Clippy
-    runs-on: ubuntu-latest
+      #runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
