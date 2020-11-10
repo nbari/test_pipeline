@@ -1,5 +1,4 @@
 name: Build, pack and ship
-runs-on: self-hosted
 
 on:
   push:
@@ -12,7 +11,8 @@ env:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+      # runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
