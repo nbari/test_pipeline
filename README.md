@@ -32,3 +32,5 @@ Create random key:
 
 Adding self-hosted runners
 https://docs.github.com/en/free-pro-team@latest/actions/hosting-your-own-runners/adding-self-hosted-runners
+
+    nohup ./run.sh &
