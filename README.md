@@ -29,3 +29,6 @@ Creating the zip:
 Create random key:
 
     openssl rand -base64 32
+
+Adding self-hosted runners
+https://docs.github.com/en/free-pro-team@latest/actions/hosting-your-own-runners/adding-self-hosted-runners
