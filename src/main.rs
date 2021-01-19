@@ -42,7 +42,7 @@ async fn main() {
         .version(format!("{} {}", env!("CARGO_PKG_VERSION"), GIT_COMMIT_HASH).as_ref())
         .arg(
             Arg::with_name("port")
-                .default_value("800")
+                .default_value("801")
                 .help("listening port")
                 .long("port")
                 .validator(is_num)
