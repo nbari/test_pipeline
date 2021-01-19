@@ -12,7 +12,7 @@ body {
     background-color: #87CEFA;
 }
 </style></head><body>
-Hello world 22:04!
+Hello world 14:38!
 </body></html>"#;
 
 pub mod built_info {
