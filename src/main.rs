@@ -12,7 +12,7 @@ body {
     background-color: #87CEFA;
 }
 </style></head><body>
-Hello world,  tokio 1!</br>
+Yukgaejang :)!</br>
 </body></html>"#;
 
 pub mod built_info {
